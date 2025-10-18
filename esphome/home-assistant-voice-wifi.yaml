@@ -1,0 +1,22 @@
+substitutions:
+  voice_assist_idle_phase_id: '1'
+  voice_assist_waiting_for_command_phase_id: '2'
+  voice_assist_listening_for_command_phase_id: '3'
+  voice_assist_thinking_phase_id: '4'
+  voice_assist_replying_phase_id: '5'
+  voice_assist_not_ready_phase_id: '10'
+  voice_assist_error_phase_id: '11'
+  hidden_ssid: false
+  wifi_ssid: "YOUR_WIFI_SSID"
+  wifi_password: "YOUR_WIFI_PASSWORD"
+
+wifi:
+  id: wifi_id
+  ssid: ${wifi_ssid}
+  password: ${wifi_password}
+  fast_connect: ${hidden_ssid}
+  on_connect:
+    - lambda: id(improv_ble_in_progress) = false;
+    - script.execute: control_leds
+  on_disconnect:
+    - script.execute: control_leds
